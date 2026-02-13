@@ -1,0 +1,157 @@
+MAP
+
+    NAME Cali
+        SIZE 700 600
+        STATUS ON
+        EXTENT -76.5926 3.3315 -76.461 3.50538
+
+        SHAPEPATH "shape"
+        FONTSET "misc/fonts/fonts.txt"
+        SYMBOLSET "misc/symbols/symbols.sym"
+
+        IMAGECOLOR 234 237 244
+        UNITS dd
+
+        WEB
+            IMAGEPATH "C:/ms4w/tmp/ms_tmp/"
+            IMAGEURL "/ms_tmp/"
+        END
+        LEGEND
+            STATUS ON       
+            IMAGECOLOR 255 255 255
+            POSITION LL
+            KEYSIZE 30 30
+            KEYSPACING 10 10
+
+            LABEL
+                TYPE TRUETYPE
+                FONT "sans"
+                SIZE 9
+                COLOR 0 0 0
+            END
+
+            OUTLINECOLOR 255 255 255
+            TRANSPARENT ON
+        END
+
+          LAYER TRANSPARENCY 30
+            NAME "Cali"
+            STATUS ON
+            DATA "cinco.shp"
+            TYPE POLYGON
+            CLASS
+                STYLE
+                    COLOR 255 255 255
+                    OUTLINECOLOR 0 0 0
+                END
+            END
+        END
+        
+       
+         LAYER
+            NAME "Comunas"
+            STATUS ON
+            DATA "six.shp"
+            TYPE POLYGON
+            LABELITEM "comuna"
+            CLASS
+            NAME "COMUNAS"
+            STYLE
+                COLOR 255 255 255
+                OUTLINECOLOR 0 0 0
+            END
+            LABEL
+               SIZE SMALL
+                COLOR 0 0 0
+            END
+           
+         END   
+        END
+        
+        LAYER
+            NAME "Barrios"
+            STATUS ON
+            DATA "one.shp"
+            TYPE POLYGON
+            LABELITEM "BARRIO"
+            CLASS
+            NAME "BARRIOS"
+            STYLE
+                COLOR 255 255 255 
+                OUTLINECOLOR 0 0 0
+            END
+
+            LABEL
+               SIZE SMALL
+                COLOR 0 0 0
+            END
+           
+         END   
+        END
+
+       LAYER
+        TRANSPARENCY 10
+        NAME "Calles"
+        STATUS ON
+        DATA "two.shp"
+        TYPE LINE
+        LABELITEM "nomenclatu"
+        CLASS
+            NAME "MALLA VIAL"    
+                STYLE
+                WIDTH 1.0
+                COLOR 0 0 0 
+                OUTLINECOLOR 0 0 0
+            END
+
+            LABEL
+              FONT "sans"
+              TYPE TRUETYPE
+              ENCODING "UTF-8"
+              SIZE 9
+              POSITION CC
+              ANGLE auto
+              PARTIALS TRUE
+              COLOR 0 0 0
+            END
+         
+         END   
+    END
+
+    LAYER
+        CONNECTIONTYPE postgis
+        NAME "Puntos"
+        STATUS ON
+        CONNECTION "user=postgres password=cris dbname=geovisor host=localhost port=5432"
+         DATA "vmecoordenadas FROM (SELECT * FROM tblviamalestado WHERE vmecod =7) AS mallavial USING UNIQUE vmecod  SRID=4326"        
+         TYPE POINT
+        CLASS
+            STYLE
+                SYMBOL 'star'
+                SIZE 40
+                COLOR 0 0 0
+            END
+        END
+    END
+    
+    LAYER
+        NAME "Brujula"
+        TRANSPARENCY 70
+        TYPE POINT
+        STATUS ON
+        TRANSFORM OFF
+        POSTLABELCACHE TRUE
+        FEATURE 
+            POINTS
+                35 35
+            END
+            END
+            CLASS
+                SYMBOL 'rosavientos'
+                COLOR 0 0 0
+                OUTLINECOLOR 0 0 0
+                STYLE
+            END
+        END
+    END
+END
